@@ -3,7 +3,7 @@ import Item from 'modules/user/components/Item';
 
 class List extends React.Component {
 
-    renderItem = (id) => <Item key={id} user={this.props.data[id]} editUser={this.props.editUser} />;
+    renderItem = (id) => <Item key={id} id={id} />;
 
     render() {
         return (

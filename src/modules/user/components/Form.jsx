@@ -1,9 +1,12 @@
+import {closeUser, saveUser} from 'modules/user/actions';
+import {userSelectorItemCurrent} from 'modules/user/selectors';
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Form extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+
         this.state = props.user;
     }
 
@@ -14,15 +17,12 @@ class Form extends React.Component {
     };
 
     onChange = (e) => {
-        console.log(e.target);
-
         this.setState({
             [e.target.name]: e.target.value,
         });
     };
 
     render() {
-        console.log(this.state);
         return (
             <form onSubmit={this.onSubmit}>
               <table>
@@ -103,4 +103,12 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default connect(
+    (state) => ({
+        user: userSelectorItemCurrent(state),
+    }),
+    {
+        closeUser,
+        saveUser,
+    },
+)(Form);
